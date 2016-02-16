@@ -2,3 +2,5 @@
 /src/
 /deal.II-toolchain-build/
 /deal.II-toolchain-unpack/
+# ignore Mac OsX files
+*.DS_Store

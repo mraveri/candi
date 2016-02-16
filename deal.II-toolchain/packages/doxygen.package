@@ -1,0 +1,25 @@
+VERSION=1.8.11
+NAME=doxygen-${VERSION}.src
+SOURCE=http://ftp.stack.nl/pub/users/dimitri/
+PACKING=.tar.gz
+CHECKSUM=f4697a444feaed739cfa2f0644abc19b
+BUILDCHAIN=cmake
+
+EXTRACTSTO=doxygen-${VERSION}
+
+BUILDDIR=${BUILD_PATH}/doxygen-${VERSION}
+
+INSTALL_PATH=${INSTALL_PATH}/doxygen-${VERSION}
+
+package_specific_register () {
+    export PATH=${INSTALL_PATH}/bin:${PATH}
+}
+
+package_specific_conf () {
+    # Generate configuration file
+    CONFIG_FILE=${CONFIGURATION_PATH}/${NAME}
+    rm -f $CONFIG_FILE
+    echo "
+export PATH=${INSTALL_PATH}/bin:\${PATH}
+" >> $CONFIG_FILE
+}
