@@ -1,0 +1,31 @@
+VERSION=2.6.2
+NAME=sundials-${VERSION}
+PACKING=.tar.gz
+SOURCE=http://pkgs.fedoraproject.org/repo/extras/sundials/${NAME}${PACKING}/3deeb0ede9f514184c6bd83ecab77d95/
+CHECKSUM=3deeb0ede9f514184c6bd83ecab77d95
+BUILDCHAIN=cmake
+
+CONFOPTS="${CONFOPTS} -DMPI_ENABLE=TRUE -DOPENMP_ENABLE=TRUE"
+INSTALL_PATH=${INSTALL_PATH}/${NAME}
+
+package_specific_register () {
+    export SUNDIALS_DIR=${INSTALL_PATH}
+    export LD_LIBRARY_PATH=${SUNDIALS_DIR}/lib:\${LD_LIBRARY_PATH}
+    export LIBRARY_PATH=${SUNDIALS_DIR}/lib:\${LIBRARY_PATH}
+    export CPATH=${SUNDIALS_DIR}/include:\${CPATH}
+    export INCLUDE=${SUNDIALS_DIR}/include:\${INCLUDE}
+}
+
+package_specific_conf () {
+    # Generate configuration file
+    CONFIG_FILE=${CONFIGURATION_PATH}/${NAME}
+    rm -f $CONFIG_FILE
+    echo "
+export SUNDIALS_DIR=${INSTALL_PATH}
+export LD_LIBRARY_PATH=${SUNDIALS_DIR}/lib:\${LD_LIBRARY_PATH}
+export LIBRARY_PATH=${SUNDIALS_DIR}/lib:\${LIBRARY_PATH}
+export CPATH=${SUNDIALS_DIR}/include:\${CPATH}
+export INCLUDE=${SUNDIALS_DIR}/include:\${INCLUDE}
+" >> $CONFIG_FILE
+}
+
