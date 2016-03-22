@@ -10,10 +10,6 @@ INSTALL_PATH=${INSTALL_PATH}/${NAME}
 
 package_specific_register () {
     export SUNDIALS_DIR=${INSTALL_PATH}
-    export LD_LIBRARY_PATH=${SUNDIALS_DIR}/lib:\${LD_LIBRARY_PATH}
-    export LIBRARY_PATH=${SUNDIALS_DIR}/lib:\${LIBRARY_PATH}
-    export CPATH=${SUNDIALS_DIR}/include:\${CPATH}
-    export INCLUDE=${SUNDIALS_DIR}/include:\${INCLUDE}
 }
 
 package_specific_conf () {
@@ -22,10 +18,6 @@ package_specific_conf () {
     rm -f $CONFIG_FILE
     echo "
 export SUNDIALS_DIR=${INSTALL_PATH}
-export LD_LIBRARY_PATH=${SUNDIALS_DIR}/lib:\${LD_LIBRARY_PATH}
-export LIBRARY_PATH=${SUNDIALS_DIR}/lib:\${LIBRARY_PATH}
-export CPATH=${SUNDIALS_DIR}/include:\${CPATH}
-export INCLUDE=${SUNDIALS_DIR}/include:\${INCLUDE}
 " >> $CONFIG_FILE
 }
 
