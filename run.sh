@@ -1,4 +1,4 @@
 #!/bin/bash
 
 
-./candi.sh --prefix=/home/marco/candi/build
+./candi.sh --prefix=/home/parallels/candi/build
